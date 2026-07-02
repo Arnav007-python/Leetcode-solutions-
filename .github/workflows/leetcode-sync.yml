@@ -1,0 +1,19 @@
+name: LeetCode Daily Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs daily at midnight UTC
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync LeetCode to GitHub
+        uses: joshcai/leetcode-sync@master
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          destination-folder: 'my-worksspace'
